@@ -49,5 +49,9 @@ button {
 }
 
 .app-sidebar-note:hover {
-  background-color: #f1f0f0;
+  background-color: #e0cccc;
+}
+
+.app-sidebar-note.active {
+  background-color: #e0cccc;
 }

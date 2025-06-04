@@ -13,6 +13,11 @@ export interface Note {
 
 function App() {
   const [notes, setNotes] = useState<Note[]>([]);
+  const [activeNote, setActiveNote] = useState<string>();
+
+  const getActiveNote: () => Note | undefined = () => {
+    return notes.find((note) => note.id === activeNote);
+  };
 
   const onAddNote = () => {
     console.log("新しくノートが追加されました");
@@ -33,8 +38,14 @@ function App() {
 
   return (
     <div className="App">
-      <Sidebar onAddNote={onAddNote} onDelete={onDelete} notes={notes} />
-      <Main />
+      <Sidebar
+        onAddNote={onAddNote}
+        onDelete={onDelete}
+        notes={notes}
+        setActiveNote={setActiveNote}
+        activeNote={activeNote}
+      />
+      <Main activeNote={getActiveNote()} />
     </div>
   );
 }

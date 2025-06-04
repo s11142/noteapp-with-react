@@ -5,9 +5,17 @@ interface Props {
   onAddNote: () => void;
   onDelete: (id: string) => void;
   notes: Note[];
+  setActiveNote: (id: string) => void;
+  activeNote: string | undefined;
 }
 
-const Sidebar = ({ onAddNote, onDelete, notes }: Props) => {
+const Sidebar = ({
+  onAddNote,
+  onDelete,
+  notes,
+  setActiveNote,
+  activeNote,
+}: Props) => {
   return (
     <div className="app-sidebar">
       <div className="app-sidebar-header">
@@ -16,7 +24,11 @@ const Sidebar = ({ onAddNote, onDelete, notes }: Props) => {
       </div>
       <div className="app-sidebar-notes">
         {notes.map((note) => (
-          <div className="app-sidebar-note" key={note.id}>
+          <div
+            className={`app-sidebar-note ${activeNote === note.id && "active"}`}
+            key={note.id}
+            onClick={() => setActiveNote(note.id)}
+          >
             <div className="sidebar-note-title">
               <strong>{note.title}</strong>
               <button onClick={() => onDelete(note.id)}>削除</button>
